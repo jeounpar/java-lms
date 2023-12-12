@@ -1,6 +1,7 @@
 package nextstep.courses.domain.image;
 
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static org.junit.jupiter.api.Assertions.assertAll;
 
 import nextstep.courses.exception.InvalidTypeException;
 import org.junit.jupiter.api.DisplayName;
@@ -11,11 +12,13 @@ class TypeTest {
     @Test
     @DisplayName("이미지 타입은 gif, jpg, jpeg, png, svg만 허용합니다")
     void type() {
-        assertThatThrownBy(() -> {
-            ImageType.value("heic");
-        }).isInstanceOf(InvalidTypeException.class);
-        assertThatThrownBy(() -> {
-            ImageType.value("bmp");
-        }).isInstanceOf(InvalidTypeException.class);
+        assertAll(
+            () -> assertThatThrownBy(() -> {
+                ImageType.value("heic");
+            }).isInstanceOf(InvalidTypeException.class),
+            () -> assertThatThrownBy(() -> {
+                ImageType.value("bmp");
+            }).isInstanceOf(InvalidTypeException.class)
+        );
     }
 }

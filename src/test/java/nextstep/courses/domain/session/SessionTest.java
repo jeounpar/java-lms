@@ -57,8 +57,8 @@ public class SessionTest {
     void session_duplicate_student() {
         assertThatThrownBy(() -> {
             session.enroll(NsUserTest.JAVAJIGI, paymentByUserAndSessionId(NsUserTest.JAVAJIGI, 1L));
-            session.enroll(NsUserTest.SANJIGI, paymentByUserAndSessionId(NsUserTest.SANJIGI, 1L));
             session.enroll(NsUserTest.PARK, paymentByUserAndSessionId(NsUserTest.PARK, 1L));
+            session.enroll(NsUserTest.SANJIGI, paymentByUserAndSessionId(NsUserTest.SANJIGI, 1L));
             session.enroll(NsUserTest.SANJIGI, paymentByUserAndSessionId(NsUserTest.SANJIGI, 1L));
         }).isInstanceOf(CannotEnrollException.class);
     }

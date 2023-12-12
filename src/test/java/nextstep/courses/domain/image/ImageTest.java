@@ -1,6 +1,7 @@
 package nextstep.courses.domain.image;
 
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static org.junit.jupiter.api.Assertions.assertAll;
 
 import nextstep.courses.exception.InvalidImageException;
 import org.junit.jupiter.api.DisplayName;
@@ -22,15 +23,17 @@ public class ImageTest {
     @Test
     @DisplayName("이미지의 width는 300픽셀, height는 200픽셀 이상이어야 한다")
     void image_width_and_height() {
-        assertThatThrownBy(() -> {
-            Image image = new Image(ONE_MB, ImageType.value("gif"), 299, 199);
-        }).isInstanceOf(InvalidImageException.class);
-        assertThatThrownBy(() -> {
-            Image image = new Image(ONE_MB, ImageType.value("gif"), 300, 199);
-        }).isInstanceOf(InvalidImageException.class);
-        assertThatThrownBy(() -> {
-            Image image = new Image(ONE_MB, ImageType.value("gif"), 299, 200);
-        }).isInstanceOf(InvalidImageException.class);
+        assertAll(
+            () -> assertThatThrownBy(() -> {
+                Image image = new Image(ONE_MB, ImageType.value("gif"), 299, 199);
+            }).isInstanceOf(InvalidImageException.class),
+            () -> assertThatThrownBy(() -> {
+                Image image = new Image(ONE_MB, ImageType.value("gif"), 300, 199);
+            }).isInstanceOf(InvalidImageException.class),
+            () -> assertThatThrownBy(() -> {
+                Image image = new Image(ONE_MB, ImageType.value("gif"), 299, 200);
+            }).isInstanceOf(InvalidImageException.class)
+        );
     }
 
     @Test
