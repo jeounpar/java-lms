@@ -1,14 +1,18 @@
 package nextstep.courses.domain.session;
 
-public enum Status {
-    // 준비중, 모집중, 종료
+public enum SessionStatus {
+
     PREPARING("preparing"),
     OPEN("open"),
     CLOSE("close");
 
     private final String type;
 
-    Status(String type) {
+    SessionStatus(String type) {
         this.type = type;
+    }
+
+    public boolean isOpen() {
+        return this.type.equals(SessionStatus.OPEN.type);
     }
 }

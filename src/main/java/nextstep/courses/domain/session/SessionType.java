@@ -9,4 +9,8 @@ public enum SessionType {
     SessionType(String type) {
         this.type = type;
     }
+
+    public boolean isPaid() {
+        return this.type.equals(SessionType.PAID.type);
+    }
 }
